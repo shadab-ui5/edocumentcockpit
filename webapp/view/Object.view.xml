@@ -1,0 +1,74 @@
+<mvc:View controllerName="sap.ttl.edocumentcockpit.controller.Object" height="100%"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:table="sap.ui.table"
+    xmlns:smartTable="sap.ui.comp.smarttable">
+    <Page id="object" title="{i18n>appTitle}" class="fullPageBackground ICTBCustom" showFooter="true" titleAlignment="Auto" showNavButton="true" navButtonPress="onNavBack">
+        <f:DynamicPage headerExpanded="true" showFooter="true">
+
+            <!-- ================= TITLE ================= -->
+            <!-- <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                <Title text="{i18n>title}" level="H2"/>
+            </f:heading>
+            </f:DynamicPageTitle>
+        </f:title> -->
+
+            <!-- ================= HEADER (FILTER AREA) ================= -->
+            <f:header>
+                <f:DynamicPageHeader>
+
+                    <f:content>
+
+                    </f:content>
+
+                </f:DynamicPageHeader>
+            </f:header>
+
+            <!-- ================= CONTENT ================= -->
+            <f:content>
+                
+                <smartTable:SmartTable id="idBillingTable" entitySet="billingEdocDetails"  tableType="Table" useVariantManagement="true" useTablePersonalisation="true" header="Billing + EDoc Details" showRowCount="true" enableAutoBinding="false" persistencyKey="SmartTableBilling" initialise="onSmartTableInit" beforeRebindTable="onBeforeRebindTable" initiallyVisibleFields="EdocOverallStatus,Edocstatus,Errormessage,BillingDocument,CompanyCode,Transporterid,Transdocno,Vehicleno,Vehicletype,Transportmode,Transportername,Signedinvoice,Signedqrcode" requestAtLeastFields="Edocstatus,EdocOverallStatus,Errormessage,Signedinvoice,Signedqrcode" class="sapUiResponsiveContentPadding">
+
+                    <smartTable:customToolbar>
+                        <OverflowToolbar design="Transparent">
+
+                            <!-- <Title text="Billing + EDoc Details"/> -->
+
+                            <ToolbarSpacer/>
+
+                            <Button id="idEditBtn" text="Edit" icon="sap-icon://edit" press="onEdit" enabled="{viewModel>/enableEdit}" visible="{viewModel>/showEdit}" />
+
+                        </OverflowToolbar>
+                    </smartTable:customToolbar>
+
+                    <table:Table id="_IDGenTable" selectionMode="MultiToggle" rowSelectionChange="onRowSelectionChange" visibleRowCountMode="Auto" visibleRowCount="13"/>
+
+                </smartTable:SmartTable>
+            </f:content>
+
+            <!-- ================= FOOTER ================= -->
+            <f:footer>
+                <Toolbar id="FooterToolbar">
+                    <ToolbarSpacer />
+
+                    <Button text="Generate E-Way Bill" icon="sap-icon://shipping-status" press="onEwayBillPress" visible="{viewModel>/showEway}" />
+                    <Button text="Cancel E-Way" icon="sap-icon://shipping-status" press="onEwayBillCancel" visible="{viewModel>/showEwayCancel}" />
+                    <!-- <Button text="Cancel E-Way" icon="sap-icon://shipping-status" press="onEwayBillCancel"/> -->
+
+                    <Button text="Generate E-Invoice" icon="sap-icon://receipt" press="onEinvoicePress" visible="{viewModel>/showEinvoice}" />
+                    <!-- <Button text="Cancel E-Invoice" icon="sap-icon://receipt" press="onEinvoicePressCancel" visible="{viewModel>/showEinvoiceCancel}" /> -->
+                    <Button text="Cancel E-Invoice" icon="sap-icon://receipt" press="onEinvoicePressCancel"/>
+
+                    <Button text="JSON" icon="sap-icon://document-text" press="onJsonPress" visible="{viewModel>/showJson}" />
+
+                    <Button text="{i18n>einvoicnbill}" icon="sap-icon://combine" press="onBothPress" visible="{viewModel>/showBoth}" />
+                </Toolbar>
+            </f:footer>
+
+        </f:DynamicPage>
+    </Page>
+</mvc:View>

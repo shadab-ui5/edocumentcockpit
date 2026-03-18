@@ -1,0 +1,111 @@
+<core:FragmentDefinition xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:f="sap.ui.layout.form">
+
+    <Dialog id="editEwayDialog" title="EWay Bill" draggable="true" resizable="true" contentWidth="700px">
+
+        <content>
+
+            <VBox>
+
+                <!-- ================= TOP SECTION ================= -->
+
+                <f:SimpleForm editable="true" layout="ResponsiveGridLayout" labelSpanXL="3" labelSpanL="3" labelSpanM="3" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" columnsXL="1" columnsL="1" columnsM="1">
+
+                    <Label text="Billing Document"/>
+                    <Input value="{editModel>BillingDocument}" editable="false"/>
+
+                    <Label text="eWay Bill Number"/>
+                    <Input value="{editModel>EwayBillNo}" editable="false"/>
+
+                    <Label text="Created On"/>
+                    <Input value="{editModel>CreatedOn}" editable="false"/>
+
+                    <Label text="Valid Upto"/>
+                    <Input value="{editModel>ValidUpto}" editable="false"/>
+
+                    <Label text="Edit Action"/>
+                    <Select id="idSelectAction" selectedKey="{editModel>EditAction}" change="onEditActionChange">
+
+                        <items>
+                            <core:Item key="" text=""/>
+                            <core:Item key="1" text="1 Maintain Transport Details"/>
+                            <core:Item key="2" text="2 Update Vehicle Number"/>
+                            <core:Item key="3" text="3 Update Part B"/>
+                        </items>
+
+                    </Select>
+
+                </f:SimpleForm>
+
+                <!-- ================= DETAILS HEADER ================= -->
+
+                <Toolbar>
+                    <Title text="Details"/>
+                </Toolbar>
+
+                <!-- ================= DETAILS SECTION ================= -->
+
+                <f:SimpleForm id="transportDetailsForm" editable="true" layout="ResponsiveGridLayout" labelSpanXL="3" labelSpanL="3" labelSpanM="3" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" columnsXL="1" columnsL="1" columnsM="1" visible="{viewModel>/showTransport}">
+
+                    <Label text="Transporter Type"/>
+                    <Select selectedKey="{editModel>TransporterType}">
+                        <items>
+                            <core:Item key="1" text="1 Transporter from Vendor Master"/>
+                        </items>
+                    </Select>
+
+                    <Label text="Transporter ID"/>
+                    <Input value="{editModel>Transporterid}"/>
+
+                    <Label text="Transporter Doc No"/>
+                    <Input value="{editModel>Transdocno}"/>
+
+                    <Label text="Transporter Doc Date"/>
+                    <DatePicker value="{editModel>Transdocdate }" displayFormat="dd.MM.yyyy"/>
+
+                    <Label text="Mode of Transport"/>
+                    <Select selectedKey="{editModel>Transportmode}">
+                        <items>
+                            <core:Item key="" text=""/>
+                            <core:Item key="Road" text="Road"/>
+                            <core:Item key="Rail" text="Rail"/>
+                            <core:Item key="Air" text="Air"/>
+                            <core:Item key="Ship" text="Ship"/>
+                        </items>
+                    </Select>
+
+                    <Label text="Vehicle Type"/>
+                    <Select selectedKey="{editModel>Vehicletype}">
+                        <items>
+                            <core:Item key="" text=""/>
+                            <core:Item key="Regular" text="Regular"/>
+                            <core:Item key="ODC" text="ODC"/>
+                        </items>
+                    </Select>
+
+                    <Label text="Distance"/>
+                    <Input value="{editModel>Transdistance}" type="Number"/>
+
+                    <Label text="Vehicle Number"/>
+                    <Input value="{editModel>Vehicleno}"/>
+
+                </f:SimpleForm>
+
+            </VBox>
+
+        </content>
+
+        <!-- ================= FOOTER ================= -->
+
+        <beginButton>
+            <Button text="Save" type="Emphasized" press="onSaveTransport"/>
+        </beginButton>
+
+        <endButton>
+            <Button text="Cancel" press="onCancelDialog"/>
+        </endButton>
+
+    </Dialog>
+
+</core:FragmentDefinition>

@@ -1,0 +1,23 @@
+{
+  "generationParameters": {
+    "generationDate": "Thu Mar 05 2026 20:15:47 GMT+0000 (Coordinated Universal Time)",
+    "generatorPlatform": "SAP Business Application Studio",
+    "serviceType": "SAP System (ABAP On-Premise)",
+    "metadataFilename": "",
+    "serviceUrl": "https://my434140.s4hana.cloud.sap/sap/opu/odata/sap/ZUI_SD_EDOCAUTH_V4",
+    "appName": "edocumentcockpit",
+    "appTitle": "EDocument Cockpit",
+    "appDescription": "An SAP Fiori application.",
+    "appNamespace": "sap.ttl",
+    "ui5Theme": "sap_horizon",
+    "ui5Version": "1.142.7",
+    "enableEslint": false,
+    "enableTypeScript": false,
+    "showMockDataInfo": true,
+    "generatorVersion": "1.20.4",
+    "template": "Basic V2",
+    "generatorName": "SAP Fiori Application Generator",
+    "entityRelatedConfig": [],
+    "launchText": "To launch the generated application, run the following from the generated application root folder:\n\n```\n    npm start\n```"
+  }
+}

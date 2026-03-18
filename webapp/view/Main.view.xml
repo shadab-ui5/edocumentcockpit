@@ -1,0 +1,118 @@
+<mvc:View controllerName="sap.ttl.edocumentcockpit.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:layout="sap.ui.layout"
+    xmlns:smartField="sap.ui.comp.smartfield"
+    xmlns:f="sap.ui.layout.form">
+    <Page id="page" title="{i18n>appTitle}" class="fullPageBackground ICTBCustom" showFooter="true" titleAlignment="Auto" showNavButton="false" navButtonPress="onNavBack">
+        <HBox width="100%" justifyContent="Center" alignItems="Center" height="90%">
+
+            <VBox id="idFormContainer" class="formContainer" justifyContent="Center" alignItems="Center" width="60rem">
+                <!-- <Label text="Selection Screen" design="Bold" textAlign="Center" class="formLabel sapUiSmallMarginBottom"/> -->
+                <VBox width="100%" class="sapUiSmallMarginTop">
+
+                    <!-- <Label text="Selection Screen" design="Bold" class="formLabel sapUiSmallMarginBottom"/> -->
+
+                    <layout:Grid defaultSpan="XL4 L4 M6 S12" hSpacing="1" vSpacing="1" width="100%">
+
+                        <!-- Row 1 -->
+                        <VBox>
+                            <Label text="E-Document Type" design="Bold" required="true"/>
+                            <ComboBox id="idEDocType" width="100%" selectionChange="onEDocTypeChange"/>
+                        </VBox>
+
+                        <VBox>
+                            <Label text="Company Code" design="Bold" required="true"/>
+                            <ComboBox id="idCompanyCode" width="100%" selectionChange="onCompanyChange"/>
+                        </VBox>
+
+                        <VBox>
+                            <Label text="Sales Organization" design="Bold" required="true"/>
+                            <ComboBox id="idSalesOrg" width="100%" selectionChange="onSalesOrgChange"/>
+                        </VBox>
+                        <VBox>
+                            <Label text="Distribution Channel" design="Bold" required="true"/>
+                            <MultiComboBox id="idDistChannel" width="100%" showSelectAll="true" items="{
+                                path:'/salesDisChannel'
+                            }" selectionChange="onDistChange">
+                                <core:Item key="{DistributionChannel}" text="{DistributionChannel} - {DistributionChannelName}"/>
+                            </MultiComboBox>
+                        </VBox>
+
+                        <VBox>
+                            <Label text="Division" design="Bold" required="true"/>
+                            <MultiComboBox id="idDivision" width="100%" items="{
+                                path:'/salesDivision'
+                            }" selectionChange="onDivisionChange">
+                                <core:Item key="{Division}" text="{Division} - {DivisionName}"/>
+                            </MultiComboBox>
+                        </VBox>
+
+                        <VBox>
+                            <Label text="Plant" design="Bold" required="true"/>
+                            <MultiComboBox id="idPlant" width="100%" selectionChange="onPlantChange" showSelectAll="true"/>
+                        </VBox>
+
+
+                        <!-- Row 3 -->
+                        <VBox>
+                            <Label text="Billing Type" design="Bold" required="true"/>
+                            <ComboBox id="idBillingType" width="100%" items="{
+                                path: 'billingModel>/BillingTypes'
+                            }" selectionChange="onBillingTypeChange">
+
+                                <core:Item key="{billingModel>key}" text="{billingModel>text}" />
+
+                            </ComboBox>
+                        </VBox>
+                        <VBox>
+                            <Label text="Customer" design="Bold"/>
+                            <MultiInput id="customerSmartField" valueHelpOnly="true" showValueHelp="true" valueHelpRequest="onCustomerValueHelp" width="100%" placeholder="Select Customer" />
+                        </VBox>
+                        <VBox>
+                            <Label text="Billing Document" design="Bold"/>
+                            <MultiInput id="idBillingDoc" valueHelpOnly="true" showValueHelp="true" valueHelpRequest="onBillingValueHelp" width="100%" placeholder="Select Customer" />
+                        </VBox>
+
+
+                        <VBox>
+                            <Label text="Billing Date" design="Bold"/>
+                            <DateRangeSelection id="idBillingDate" width="100%" displayFormat="dd.MM.yyyy" delimiter=" - " />
+                        </VBox>
+                        <VBox>
+                            <Label text="Overall Status" design="Bold"/>
+                            <ComboBox id="idOverallStatus" width="100%" items="{
+                                    path: '/eDocOverallStatusVH'
+                                }" selectionChange="onOverallChange" selectedKey="PENDING">
+
+                                <core:Item key="{OverallStatus}" text="{StatusDescription}" />
+                            </ComboBox>
+                        </VBox>
+                        <VBox>
+                            <Label text="E-Document Status" design="Bold"/>
+                            <ComboBox id="idDocStatus" width="100%" items="{
+                                path: '/eDocStatusVH'
+                            }" selectionChange="onDocStatusChange" enabled="{billingModel>/showBillingDocument}">
+
+                                <core:Item key="{ProcessStatus}" text="{StatusDescription}" />
+
+                            </ComboBox>
+                        </VBox>
+
+
+                        <!-- Row 4 -->
+
+
+                    </layout:Grid>
+
+                </VBox>
+
+                <HBox justifyContent="Center" width="100%" class="sapUiTinyMarginTop">
+                    <Button id="idButtonGo" text="Execute" type="Emphasized" press="onExecute" class="formButton sapUiSmallMarginEnd" />
+
+                </HBox>
+            </VBox>
+        </HBox>
+    </Page>
+</mvc:View>
