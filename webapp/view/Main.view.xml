@@ -60,7 +60,7 @@
                             <Label text="Billing Type" design="Bold" required="true"/>
                             <ComboBox id="idBillingType" width="100%" items="{
                                 path: 'billingModel>/BillingTypes'
-                            }" selectionChange="onBillingTypeChange">
+                            }" selectionChange="onBillingTypeChange" selectedKey="F2">
 
                                 <core:Item key="{billingModel>key}" text="{billingModel>text}" />
 
@@ -72,7 +72,7 @@
                         </VBox>
                         <VBox>
                             <Label text="Billing Document" design="Bold"/>
-                            <MultiInput id="idBillingDoc" valueHelpOnly="true" showValueHelp="true" valueHelpRequest="onBillingValueHelp" width="100%" placeholder="Select Customer" />
+                            <MultiInput id="idBillingDoc" valueHelpOnly="true" showValueHelp="true" valueHelpRequest="onBillingValueHelp" width="100%" placeholder="Select Document" />
                         </VBox>
 
 

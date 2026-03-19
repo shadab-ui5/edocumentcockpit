@@ -321,7 +321,11 @@ sap.ui.define([
                 var aItems = oDist.getItems();
 
                 if (aItems.length > 0) {
-                    oDist.setSelectedKeys([aItems[0].getKey()]);
+                    var aKeys = aItems.map(function (oItem) {
+                        return oItem.getKey();
+                    });
+
+                    oDist.setSelectedKeys(aKeys);
                 }
 
             });
