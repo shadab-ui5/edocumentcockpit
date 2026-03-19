@@ -135,7 +135,44 @@ sap.ui.define([
                         }));
 
                     }
-                    if (sLabel === "Signedinvoice" || sLabel === "Signedqrcode") {
+                    if (sLabel === "Signedqrcode") {
+
+                        oColumn.setWidth("15rem");
+
+                        oColumn.setTemplate(new sap.m.Link({
+                            text: {
+                                path: "Signedqrcode",
+                                formatter: function (sMsg) {
+                                    if (!sMsg) return "";
+                                    return sMsg.length > 30 ? sMsg.substring(0, 30) + "..." : sMsg;
+                                }
+                            },
+                            tooltip: "{Signedqrcode}",
+                            press: function (oEvent) {
+
+                                let sFullMessage = oEvent.getSource()
+                                    .getBindingContext()
+                                    .getProperty("Signedqrcode");
+
+                                new sap.m.Dialog({
+                                    title: "Signedqrcode Message",
+                                    contentWidth: "500px",
+                                    content: new sap.m.Text({
+                                        text: " " + sFullMessage,
+                                        wrapping: true
+                                    }).addStyleClass("sapUiTinyMargin"),
+                                    beginButton: new sap.m.Button({
+                                        text: "Close",
+                                        press: function (oDialogEvent) {
+                                            oDialogEvent.getSource().getParent().close();
+                                        }
+                                    })
+                                }).open();
+                            }
+                        }));
+
+                    }
+                    if (sLabel === "Signedinvoice") {
 
                         oColumn.setWidth("10rem");
 
@@ -216,10 +253,24 @@ sap.ui.define([
             let oTable = oEvent.getSource();
             let aSelectedIndices = oTable.getSelectedIndices();
 
-            this.getView()
-                .getModel("viewModel")
-                .setProperty("/enableEdit", aSelectedIndices.length > 0);
+            let bDisable = true;
 
+            aSelectedIndices.forEach((iIndex) => {
+                const oContext = oTable.getContextByIndex(iIndex);
+                const oData = oContext.getObject();
+
+                if (!oData.Invrefnumber) {
+                    bDisable = false;
+                }
+            });
+
+            const oViewModel = this.getView().getModel("viewModel");
+
+            // Enable edit if at least one row selected
+            oViewModel.setProperty("/enableEdit", aSelectedIndices.length > 0);
+
+            // Disable if ANY row has empty Invrefnumber
+            oViewModel.setProperty("/disableIrn", bDisable);
         },
         /**
          * for multi select table
@@ -789,6 +840,7 @@ sap.ui.define([
             const oPayload = {
                 action: "CANCEL_EINVOICE",
                 items: aItems.map(function (o) {
+
                     return {
                         billingdocument: o.BillingDocument,
                         irn: o.Invrefnumber,

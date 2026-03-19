@@ -31,7 +31,7 @@
             <!-- ================= CONTENT ================= -->
             <f:content>
                 
-                <smartTable:SmartTable id="idBillingTable" entitySet="billingEdocDetails"  tableType="Table" useVariantManagement="true" useTablePersonalisation="true" header="Billing + EDoc Details" showRowCount="true" enableAutoBinding="false" persistencyKey="SmartTableBilling" initialise="onSmartTableInit" beforeRebindTable="onBeforeRebindTable" initiallyVisibleFields="EdocOverallStatus,Edocstatus,Errormessage,BillingDocument,CompanyCode,Transporterid,Transdocno,Vehicleno,Vehicletype,Transportmode,Transportername,Signedinvoice,Signedqrcode" requestAtLeastFields="Edocstatus,EdocOverallStatus,Errormessage,Signedinvoice,Signedqrcode" class="sapUiResponsiveContentPadding">
+                <smartTable:SmartTable id="idBillingTable" entitySet="billingEdocDetails"  tableType="Table" useVariantManagement="true" useTablePersonalisation="true" header="Billing + EDoc Details" showRowCount="true" enableAutoBinding="false" persistencyKey="SmartTableBilling" initialise="onSmartTableInit" beforeRebindTable="onBeforeRebindTable" initiallyVisibleFields="EdocOverallStatus,Edocstatus,Errormessage,BillingDocument,CompanyCode,Transporterid,Transdocno,Vehicleno,Vehicletype,Transportmode,Transportername,Signedinvoice,Signedqrcode" requestAtLeastFields="Edocstatus,EdocOverallStatus,Errormessage,Signedinvoice,Signedqrcode,Invrefnumber" class="sapUiResponsiveContentPadding">
 
                     <smartTable:customToolbar>
                         <OverflowToolbar design="Transparent">
@@ -56,12 +56,12 @@
                     <ToolbarSpacer />
 
                     <Button text="Generate E-Way Bill" icon="sap-icon://shipping-status" press="onEwayBillPress" visible="{viewModel>/showEway}" />
-                    <Button text="Cancel E-Way" icon="sap-icon://shipping-status" press="onEwayBillCancel" visible="{viewModel>/showEwayCancel}" />
+                    <Button text="Cancel E-Way" icon="sap-icon://shipping-status" press="onEwayBillCancel" visible="{viewModel>/showEwayCancel}" enabled="{viewModel>/disableIrn}"/>
                     <!-- <Button text="Cancel E-Way" icon="sap-icon://shipping-status" press="onEwayBillCancel"/> -->
 
                     <Button text="Generate E-Invoice" icon="sap-icon://receipt" press="onEinvoicePress" visible="{viewModel>/showEinvoice}" />
                     <!-- <Button text="Cancel E-Invoice" icon="sap-icon://receipt" press="onEinvoicePressCancel" visible="{viewModel>/showEinvoiceCancel}" /> -->
-                    <Button text="Cancel E-Invoice" icon="sap-icon://receipt" press="onEinvoicePressCancel"/>
+                    <Button text="Cancel E-Invoice" icon="sap-icon://receipt" press="onEinvoicePressCancel" enabled="{viewModel>/disableIrn}"/>
 
                     <Button text="JSON" icon="sap-icon://document-text" press="onJsonPress" visible="{viewModel>/showJson}" />
 
