@@ -724,6 +724,13 @@ sap.ui.define([
                 return;
             }
             this.getView().setBusy(true);
+            aItems = aItems.map(obj => {
+                const { Invrefnumber, ...rest } = obj;
+                return {
+                    ...rest,
+                    irn: Invrefnumber
+                };
+            });
             const oPayload = {
                 action: "GEN_EWAY",
                 items: aItems
