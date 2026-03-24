@@ -172,52 +172,67 @@ sap.ui.define([
                         }));
 
                     }
-                    if (sLabel === "Signedinvoice") {
+                    // if (sLabel === "Signedinvoice") {
 
+                    //     oColumn.setWidth("10rem");
+
+                    //     oColumn.setTemplate(new sap.m.Link({
+                    //         text: "Preview",
+                    //         press: function (oEvent) {
+
+                    //             let sPath = sLabel; // Signedinvoice or Signedqrcode
+
+                    //             let sBase64 = oEvent.getSource()
+                    //                 .getBindingContext()
+                    //                 .getProperty(sPath);
+
+                    //             if (!sBase64) {
+                    //                 sap.m.MessageToast.show("No image available");
+                    //                 return;
+                    //             }
+
+                    //             let sSrc = "data:image/png;base64," + sBase64;
+
+                    //             let oDialog = new sap.m.Dialog({
+                    //                 title: "Image Preview",
+                    //                 contentWidth: "600px",
+                    //                 contentHeight: "400px",
+                    //                 content: new sap.m.Image({
+                    //                     src: sSrc,
+                    //                     width: "100%",
+                    //                     height: "100%"
+                    //                 }),
+                    //                 beginButton: new sap.m.Button({
+                    //                     text: "Close",
+                    //                     press: function () {
+                    //                         oDialog.close();
+                    //                     }
+                    //                 }),
+                    //                 afterClose: function () {
+                    //                     oDialog.destroy();
+                    //                 }
+                    //             });
+
+                    //             oDialog.open();
+                    //         }
+                    //     }));
+                    // }
+                    if (sLabel === "Signedinvoice") {
                         oColumn.setWidth("10rem");
 
                         oColumn.setTemplate(new sap.m.Link({
                             text: "Preview",
-                            press: function (oEvent) {
+                            href: "{Signedinvoice}",   // bind URL directly
+                            target: "_blank",          // open in new tab
 
-                                let sPath = sLabel; // Signedinvoice or Signedqrcode
-
-                                let sBase64 = oEvent.getSource()
-                                    .getBindingContext()
-                                    .getProperty(sPath);
-
-                                if (!sBase64) {
-                                    sap.m.MessageToast.show("No image available");
-                                    return;
+                            visible: {
+                                path: "Signedinvoice",
+                                formatter: function (val) {
+                                    return !!val; // show only if URL exists
                                 }
-
-                                let sSrc = "data:image/png;base64," + sBase64;
-
-                                let oDialog = new sap.m.Dialog({
-                                    title: "Image Preview",
-                                    contentWidth: "600px",
-                                    contentHeight: "400px",
-                                    content: new sap.m.Image({
-                                        src: sSrc,
-                                        width: "100%",
-                                        height: "100%"
-                                    }),
-                                    beginButton: new sap.m.Button({
-                                        text: "Close",
-                                        press: function () {
-                                            oDialog.close();
-                                        }
-                                    }),
-                                    afterClose: function () {
-                                        oDialog.destroy();
-                                    }
-                                });
-
-                                oDialog.open();
                             }
                         }));
                     }
-
                 });
 
             });
@@ -717,7 +732,7 @@ sap.ui.define([
 
             const that = this;
 
-            const aItems = this._getSelectedItemsPayload();
+            let aItems = this._getSelectedItemsPayload();
 
             if (!aItems.length) {
                 sap.m.MessageToast.show("No items selected");
