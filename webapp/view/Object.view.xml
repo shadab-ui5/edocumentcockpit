@@ -62,8 +62,9 @@
                     <Button text="Generate E-Invoice" icon="sap-icon://receipt" press="onEinvoicePress" visible="{viewModel>/showEinvoice}" />
                     <!-- <Button text="Cancel E-Invoice" icon="sap-icon://receipt" press="onEinvoicePressCancel" visible="{viewModel>/showEinvoiceCancel}" /> -->
                     <Button text="Cancel E-Invoice" icon="sap-icon://receipt" press="onEinvoicePressCancel" enabled="{viewModel>/disableIrn}"/>
-
-                    <Button text="JSON" icon="sap-icon://document-text" press="onJsonPress" visible="{viewModel>/showJson}" />
+                    <!-- visible="{viewModel>/showJson}" -->
+                    <Button text="Download Eway JSON" icon="sap-icon://document-text" press="onEwayJsonPress"  />
+                    <Button text="Download Einvoice JSON" icon="sap-icon://document-text" press="onEinvoiceJsonPress"  />
 
                     <Button text="{i18n>einvoicnbill}" icon="sap-icon://combine" press="onBothPress" visible="{viewModel>/showBoth}" />
                 </Toolbar>

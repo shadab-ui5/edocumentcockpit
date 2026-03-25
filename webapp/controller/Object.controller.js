@@ -774,6 +774,139 @@ sap.ui.define([
             });
 
         },
+        onEinvoiceJsonPress: function () {
+
+            const that = this;
+            const aItems = this._getSelectedItemsPayload();
+
+            if (!aItems.length) {
+                sap.m.MessageToast.show("No items selected");
+                return;
+            }
+            this.getView().setBusy(true);
+
+            const oPayload = {
+                action: "GEN_EINVOICE",
+                download: "X",
+                items: aItems
+            };
+
+            console.log("Payload:", oPayload);
+
+            $.ajax({
+                url: "/sap/bc/http/sap/ZCL_EDOC_HANDLER_SERV?sap-client=080",
+                method: "POST",
+                contentType: "application/json",
+                data: JSON.stringify(oPayload),
+
+                success: function (oResponse) {
+                    that.getView().setBusy(false);
+                    that._showResponseDialog(oResponse);
+                    that.byId("idBillingTable").rebindTable();
+                },
+
+                error: function () {
+                    that.getView().setBusy(false);
+                    sap.m.MessageBox.error("Service call failed");
+                    that.byId("idBillingTable").rebindTable();
+                }
+
+            });
+
+        },
+        onEwayJsonPress: function () {
+
+            const that = this;
+
+            let aItems = this._getSelectedItemsPayload();
+
+            if (!aItems.length) {
+                sap.m.MessageToast.show("No items selected");
+                return;
+            }
+            this.getView().setBusy(true);
+            aItems = aItems.map(obj => {
+                const { Invrefnumber, ...rest } = obj;
+                return {
+                    ...rest,
+                    irn: Invrefnumber
+                };
+            });
+            const oPayload = {
+                action: "GEN_EWAY",
+                download: "X",
+                items: aItems
+            };
+
+            console.log("Payload:", oPayload);
+
+            $.ajax({
+                url: "/sap/bc/http/sap/ZCL_EDOC_HANDLER_SERV?sap-client=080",
+                method: "POST",
+                contentType: "application/json",
+                data: JSON.stringify(oPayload),
+
+                success: function (oResponse) {
+                    that.getView().setBusy(false);
+                    that._showResponseDialog(oResponse);
+                    that.byId("idBillingTable").rebindTable();
+                },
+
+                error: function () {
+                    that.getView().setBusy(false);
+                    sap.m.MessageBox.error("Service call failed");
+                    that.byId("idBillingTable").rebindTable();
+                }
+
+            });
+
+        },
+
+        _showResponseDialog: function (oResponse) {
+            let sMessage = "";
+
+            if (typeof oResponse === "object") {
+                sMessage = JSON.stringify(oResponse, null, 2);
+            } else {
+                sMessage = oResponse;
+            }
+
+            if (!this._oResponseDialog) {
+                this._oResponseDialog = new sap.m.Dialog({
+                    title: "Service Response",
+                    stretch: true, // 🔥 Makes dialog full screen
+                    content: [
+                        new sap.m.VBox({
+                            fitContainer: true,
+                            height: "100%",
+                            items: [
+                                new sap.m.TextArea({
+                                    value: "",
+                                    width: "100%",
+                                    height: "100%",
+                                    rows: 30,
+                                    editable: false,
+                                    growing: false
+                                })
+                            ]
+                        })
+                    ],
+                    beginButton: new sap.m.Button({
+                        text: "Close",
+                        press: function () {
+                            this._oResponseDialog.close();
+                        }.bind(this)
+                    })
+                });
+
+                this.getView().addDependent(this._oResponseDialog);
+            }
+
+            // Set value
+            this._oResponseDialog.getContent()[0].getItems()[0].setValue(sMessage);
+
+            this._oResponseDialog.open();
+        },
         onEinvoicePressCancel: function () {
 
             const aItems = this._getSelectedItemsPayload();
