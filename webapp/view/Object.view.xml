@@ -56,7 +56,8 @@
                     <ToolbarSpacer />
 
                     <Button text="Generate E-Way Bill" icon="sap-icon://shipping-status" press="onEwayBillPress" visible="{viewModel>/showEway}" />
-                    <Button text="Cancel E-Way" icon="sap-icon://shipping-status" press="onEwayBillCancel" visible="{viewModel>/showEwayCancel}" enabled="{viewModel>/disableIrn}"/>
+                    <!-- visible="{viewModel>/showEwayCancel}" -->
+                    <Button text="Cancel E-Way" icon="sap-icon://shipping-status" press="onEwayBillCancel" enabled="{viewModel>/disableIrn}"/>
                     <!-- <Button text="Cancel E-Way" icon="sap-icon://shipping-status" press="onEwayBillCancel"/> -->
 
                     <Button text="Generate E-Invoice" icon="sap-icon://receipt" press="onEinvoicePress" visible="{viewModel>/showEinvoice}" />
