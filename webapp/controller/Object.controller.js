@@ -1065,7 +1065,7 @@ sap.ui.define([
                 items: aItems.map(function (o) {
                     return {
                         billingdocument: o.BillingDocument,
-                        irn: o.Invrefnumber,
+                        ewaybillno: o.Ewaybillno,
                         reason: sReason,
                         remarks: sRemark
                     };
