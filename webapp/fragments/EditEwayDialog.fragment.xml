@@ -62,7 +62,7 @@
                     <Input value="{editModel>Transdocno}"/>
 
                     <Label text="Transporter Doc Date"/>
-                    <DatePicker value="{editModel>Transdocdate }" displayFormat="dd.MM.yyyy"/>
+                    <DatePicker dateValue="{editModel>Transdocdate}" displayFormat="dd.MM.yyyy"/>
 
                     <Label text="Mode of Transport"/>
                     <Select selectedKey="{editModel>Transportmode}">

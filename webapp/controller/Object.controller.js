@@ -1018,7 +1018,7 @@ sap.ui.define([
                     that._handleServiceResponse(oResponse);
                     that.byId("idBillingTable").rebindTable();
 
-                    that._cancelDialog.close();
+                    that.onCloseCancelDialog();
                 },
 
                 error: function () {
@@ -1084,7 +1084,7 @@ sap.ui.define([
                     that.getView().setBusy(false);
                     that._handleServiceResponse(oResponse);
                     that.byId("idBillingTable").rebindTable();
-                    that._cancelDialog.close();
+                    that.onCloseCancelDialog();
                 },
 
                 error: function () {
