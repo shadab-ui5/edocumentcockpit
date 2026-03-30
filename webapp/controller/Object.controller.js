@@ -536,6 +536,8 @@ sap.ui.define([
                 oModel.setProperty(sPath + "/Vehicletype", oTransportData.Vehicletype);
                 oModel.setProperty(sPath + "/Transdistance", oTransportData.Transdistance);
                 oModel.setProperty(sPath + "/Vehicleno", oTransportData.Vehicleno);
+                oModel.setProperty(sPath + "/Transportergstin", oTransportData.Transportergstin);
+                oModel.setProperty(sPath + "/Transportername", oTransportData.Transportername);
 
                 let oItem = Object.assign({}, oObject);
 
@@ -547,6 +549,8 @@ sap.ui.define([
                 oItem.Vehicletype = oTransportData.Vehicletype;
                 oItem.Transdistance = oTransportData.Transdistance;
                 oItem.Vehicleno = oTransportData.Vehicleno;
+                oItem.Transportername = oTransportData.Transportername;
+                oItem.Transportergstin = oTransportData.Transportergstin;
 
                 aUpdatedItems.push(oItem);
 
@@ -643,6 +647,8 @@ sap.ui.define([
                     oObject.Vehicletype = oTransportData.Vehicletype || oObject.Vehicletype;
                     oObject.Transdistance = oTransportData.Transdistance || oObject.Transdistance;
                     oObject.Vehicleno = oTransportData.Vehicleno || oObject.Vehicleno;
+                    oObject.Transportername = oTransportData.Transportername || oObject.Transportername;
+                    oObject.Transportergstin = oTransportData.Transportergstin || oObject.Transportergstin;
 
                 }
 

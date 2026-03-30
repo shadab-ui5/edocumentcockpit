@@ -48,13 +48,17 @@
 
                 <f:SimpleForm id="transportDetailsForm" editable="true" layout="ResponsiveGridLayout" labelSpanXL="3" labelSpanL="3" labelSpanM="3" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" columnsXL="1" columnsL="1" columnsM="1" visible="{viewModel>/showTransport}">
 
-                    <Label text="Transporter Type"/>
+                    <!-- <Label text="Transporter Type"/>
                     <Select selectedKey="{editModel>TransporterType}">
                         <items>
                             <core:Item key="1" text="1 Transporter from Vendor Master"/>
                         </items>
-                    </Select>
+                    </Select> -->
 
+                    <Label text="Transporter GSTIN"/>
+                    <Input value="{editModel>Transportergstin}"/>
+                    <Label text="Transporter Name"/>
+                    <Input value="{editModel>Transportername}"/>
                     <Label text="Transporter ID"/>
                     <Input value="{editModel>Transporterid}"/>
 
